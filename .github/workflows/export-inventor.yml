@@ -1,0 +1,48 @@
+name: Export Inventor Files to STEP
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*.ipt'
+
+jobs:
+  export-to-step:
+    runs-on: self-hosted
+    permissions:
+      contents: write    
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        lfs: true
+        
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pywin32
+        
+    - name: Export Inventor files to STEP
+      shell: pwsh
+      run: |
+        # PowerShell script to find and process Inventor files
+        $inventorFiles = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -Include *.ipt
+        
+        foreach ($file in $inventorFiles) {
+          Write-Host "Processing $($file.FullName)"
+          python $env:GITHUB_WORKSPACE\.github\scripts\export-to-step.py "$($file.FullName)"
+        }
+        
+    - name: Commit STEP files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add *.step
+        git commit -m "feat: export inventor files to step" || echo "No changes to commit"
+        git push
