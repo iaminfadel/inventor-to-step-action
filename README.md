@@ -1,7 +1,7 @@
 # Inventor to STEP Action
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/inventor-to-step-action/export-inventor.yml?label=Export%20Status)](https://github.com/iaminfadel/inventor-to-step-action/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/iaminfadel/inventor-to-step-action/export-inventor.yml?label=Export%20Status)](https://github.com/iaminfadel/inventor-to-step-action/actions)
 
 Custom Github Action workflow to export Inventor .ipt files to STEP files automatically when pushed to the repository.
 
@@ -12,7 +12,7 @@ GitHub's default Windows runners don't have Inventor installed, so you have to u
 ## Self-hosted Runner Setup
 Since you'll need Inventor installed:
 1. Set up a Windows computer with Inventor installed as a GitHub self-hosted runner
-2. In your GitHub repository, go to Settings > Actions > Runners > New self-hosted runner
+2. In your GitHub repository, go to `Settings > Actions > Runners > New self-hosted runner`
 3. Follow the instructions to connect your computer
 
 ## How It Works
@@ -53,7 +53,3 @@ jobs:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
